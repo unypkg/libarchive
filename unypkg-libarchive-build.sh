@@ -11,7 +11,7 @@ set -vx
 wget -qO- uny.nu/pkg | bash -s buildsys
 
 ### Installing build dependencies
-#unyp install python expat openssl
+unyp install libxml2 pcre2
 
 #pip3_bin=(/uny/pkg/python/*/bin/pip3)
 #"${pip3_bin[0]}" install --upgrade pip
@@ -78,10 +78,11 @@ get_include_paths
 unset LD_RUN_PATH
 
 ./configure \
-    --prefix=/uny/pkg/"$pkgname"/"$pkgver"
+    --prefix=/uny/pkg/"$pkgname"/"$pkgver" \
+    --disable-static
 
 make -j"$(nproc)"
-make -j"$(nproc)" check 
+
 make -j"$(nproc)" install
 
 ####################################################
