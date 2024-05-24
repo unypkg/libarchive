@@ -6,7 +6,7 @@ set -vx
 ######################################################################################################################
 ### Setup Build System and GitHub
 
-##apt install -y autopoint
+apt install -y autopoint groff
 
 wget -qO- uny.nu/pkg | bash -s buildsys
 
@@ -51,9 +51,9 @@ echo "newer" >release-"$pkgname"
 
 git_clone_source_repo
 
-#cd "$pkgname" || exit
-#./autogen.sh
-#cd /uny/sources || exit
+cd "$pkgname" || exit
+sh build/autogen.sh #&& ./configure && make distcheck
+cd /uny/sources || exit
 
 archiving_source
 
